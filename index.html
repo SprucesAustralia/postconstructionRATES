@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Construction Cleaning Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(to right, #4CAF50, #2196F3);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #form form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: auto;
+        }
+        input, select {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #priceResult {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e6ffe6;
+            border: 1px solid #4CAF50;
+            display: none;
+        }
+        #priceResult.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #scope ul {
+            list-style: none;
+            padding: 0;
+        }
+        #scope li {
+            margin: 10px 0;
+        }
+        #scope i {
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .column {
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .column:hover {
+            transform: scale(1.05);
+        }
+        .budget {
+            background-color: #e6ffe6;
+        }
+        .standard {
+            background-color: #e6f2ff;
+            border: 2px solid #FFD700;
+            position: relative;
+        }
+        .standard::before {
+            content: "Recommended";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #FFD700;
+            color: white;
+            padding: 5px;
+            font-size: 12px;
+        }
+        .ultra {
+            background-color: #fff5e6;
+        }
+        @media (max-width: 768px) {
+            .columns {
+                grid-template-columns: 1fr;
+            }
+            .column {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Post-Construction Cleaning Services</h1>
+        <p>Base Rate: $550 + GST</p>
+        <p>Per m² Rates:</p>
+        <ul>
+            <li>Budget: 4.25 per m²</li>
+            <li>Standard: 4.75 per m²</li>
+            <li>Ultra-Flexible: 5.75 per m²</li>
+        </ul>
+    </header>
+
+    <section id="form">
+        <h2>Get a Quote</h2>
+        <form>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter your phone number"><br>
+            <label for="area">Floor Plan Area (m²):</label>
+            <input type="number" id="area" name="area" placeholder="Enter floor plan area in m²"><br>
+            <label for="package">Select Package:</label>
+            <select id="package" name="package">
+                <option value="budget">Budget</option>
+                <option value="standard" selected>Standard</option>
+                <option value="ultra">Ultra-Flexible</option>
+            </select><br>
+            <button type="button" onclick="calculatePrice()">Calculate Price</button>
+        </form>
+        <div id="priceResult">
+            <h3>Your Estimated Price:</h3>
+            <p id="price"></p>
+        </div>
+    </section>
+
+    <section id="scope">
+        <h2>Scope of Work</h2>
+        <ul>
+            <li><i class="fas fa-trash-alt"></i> Removal of construction debris and dust</li>
+            <li><i class="fas fa-window-maximize"></i> Cleaning of floors, windows, and surfaces</li>
+            <li><i class="fas fa-paint-roller"></i> Wiping down walls and fixtures</li>
+            <li><i class="fas fa-broom"></i> Vacuuming and mopping</li>
+            <li><i class="fas fa-check-circle"></i> General tidying to prepare the site for occupancy</li>
+        </ul>
+    </section>
+
+    <section id="pricing">
+        <h2>Pricing Packages</h2>
+        <div class="columns">
+            <div class="column budget">
+                <h3>Budget</h3>
+                <p>10% Discount</p>
+                <ul>
+                    <li>Visits: 1 visit</li>
+                    <li>Dates: No changes allowed within 10 calendar days</li>
+                    <li>Payment Terms: 25% deposit on booking, 25% after the first day of clean - balance upon completion, with 3 business days to pay</li>
+                    <li>Site Readiness: Site must be ready with no interference; delays may incur waiting fees. Cleaning process cannot continue during our cleaning process.</li>
+                    <li>Re-booking Fee: $150 fee for modifications or cancellations within 24 hours</li>
+                    <li>Additional Work: Extra cleaning due to ongoing trades or re-soiling billed separately at $50 per hour. Waiting fee of $50 per hour if cleaners cannot work due to obstructions.</li>
+                    <li>Access: Additional detailing or high-level cleaning billed separately</li>
+                </ul>
+            </div>
+            <div class="column standard">
+                <h3>Standard</h3>
+                <p>Recommended - Best Value</p>
+                <ul>
+                    <li>Visits: 2 visits</li>
+                    <li>Dates: Changes allowed until 5 days prior to start</li>
+                    <li>Payment Terms: 10% deposit on booking, 20% after the first day of clean - balance upon completion, with 7 business days to pay</li>
+                    <li>Site Readiness: Up to 1 hour of interference allowed without additional charge - re-cleaning of areas that get dirty again due to ongoing trades, okay to a reasonable level, up to 2 hours of re-cleaning</li>
+                    <li>Re-booking Fee: $50 fee for modifications or cancellations within 24 hours</li>
+                    <li>Additional Work: First 1 hour of additional work included, then billed at $50 per hour. First 30 minutes of waiting time included, then $50 per hour</li>
+                    <li>Access: Up to 2 hours of extras included, for things outside the initial scope</li>
+                </ul>
+            </div>
+            <div class="column ultra">
+                <h3>Ultra-Flexible</h3>
+                <p>20% Premium</p>
+                <ul>
+                    <li>Visits: Unlimited visits until the job reaches the desired standard, limited to agreed initial scope areas</li>
+                    <li>Dates: Completely flexible</li>
+                    <li>Payment Terms: No deposit required, full payment due within 30 days after completion</li>
+                    <li>Site Readiness: Up to 4 hours of interference allowed without additional charge</li>
+                    <li>Re-booking Fee: No fee for modifications or cancellations within 24 hours</li>
+                    <li>Additional Work: First 3 hours of additional work included, then billed at $50 per hour. First 1 hour of waiting time included, then $50 per hour</li>
+                    <li>Access: Up to 4 hours of extras included, for things outside the scope</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function calculatePrice() {
+            var area = document.getElementById('area').value;
+            var package = document.getElementById('package').value;
+            var rate;
+
+            if (package === 'budget') {
+                rate = 4.25;
+            } else if (package === 'standard') {
+                rate = 4.75;
+            } else if (package === 'ultra') {
+                rate = 5.75;
+            }
+
+            if (isNaN(area) || area <= 0) {
+                alert('Please enter a valid area in m²');
+                return;
+            }
+
+            var base = 550;
+            var subtotal = base + (area * rate);
+            var gst = subtotal * 0.10;
+            var total = subtotal + gst;
+
+            document.getElementById('price').innerHTML = 'Total Price: $' + total.toFixed(2) + ' (including GST)';
+            document.getElementById('priceResult').classList.add('show');
+        }
+    </script>
+</body>
+</html>
