@@ -4,77 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post-Construction Cleaning Services</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
         }
         header {
-            background: linear-gradient(to right, #4CAF50, #2196F3);
-            color: white;
+            background-color: #f8f8f8;
             padding: 20px;
             text-align: center;
         }
-        h1, h2, h3 {
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
             color: #333;
         }
         section {
             padding: 20px;
-            margin: 20px;
+            margin: 40px 20px;
             background-color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        #form form {
-            display: flex;
-            flex-direction: column;
-            max-width: 400px;
-            margin: auto;
+        #areaSelection {
+            text-align: center;
         }
-        input, select {
-            padding: 10px;
-            margin: 5px 0;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #priceResult {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e6ffe6;
-            border: 1px solid #4CAF50;
-            display: none;
-        }
-        #priceResult.show {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        #scope ul {
-            list-style: none;
-            padding: 0;
-        }
-        #scope li {
+        #area {
+            width: 80%;
             margin: 10px 0;
         }
-        #scope i {
-            margin-right: 10px;
-            color: #4CAF50;
+        #areaValue {
+            font-weight: bold;
         }
         .columns {
             display: grid;
@@ -85,31 +47,54 @@
             padding: 20px;
             border: 1px solid #ccc;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
         }
         .column:hover {
             transform: scale(1.05);
         }
-        .budget {
-            background-color: #e6ffe6;
+        .column.selected {
+            border: 2px solid #007BFF;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
-        .standard {
-            background-color: #e6f2ff;
-            border: 2px solid #FFD700;
-            position: relative;
-        }
-        .standard::before {
-            content: "Recommended";
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            background: #FFD700;
+        .recommended {
+            background-color: #007BFF;
             color: white;
             padding: 5px;
             font-size: 12px;
+            position: absolute;
+            top: -10px;
+            left: 10px;
         }
-        .ultra {
-            background-color: #fff5e6;
+        #selection {
+            text-align: center;
+        }
+        #selection button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #selection button:hover {
+            background-color: #0056b3;
+        }
+        #scope ul {
+            list-style: none;
+            padding: 0;
+        }
+        #scope li {
+            margin: 10px 0;
+        }
+        #scope i {
+            color: #007BFF;
+            margin-right: 10px;
+        }
+        #scope p {
+            font-size: 0.9em;
+            color: #666;
         }
         @media (max-width: 768px) {
             .columns {
@@ -124,53 +109,21 @@
 <body>
     <header>
         <h1>Post-Construction Cleaning Services</h1>
-        <p>Base Rate: $550 + GST</p>
-        <p>Per m² Rates:</p>
-        <ul>
-            <li>Budget: 4.25 per m²</li>
-            <li>Standard: 4.75 per m²</li>
-            <li>Ultra-Flexible: 5.75 per m²</li>
-        </ul>
+        <p>Our pricing includes a base rate of $550 plus a per m² charge based on the selected package. All prices include 10% GST.</p>
     </header>
 
-    <section id="form">
-        <h2>Get a Quote</h2>
-        <form>
-            <label for="phone">Phone Number:</label>
-            <input type="text" id="phone" name="phone" placeholder="Enter your phone number"><br>
-            <label for="area">Floor Plan Area (m²):</label>
-            <input type="number" id="area" name="area" placeholder="Enter floor plan area in m²"><br>
-            <label for="package">Select Package:</label>
-            <select id="package" name="package">
-                <option value="budget">Budget</option>
-                <option value="standard" selected>Standard</option>
-                <option value="ultra">Ultra-Flexible</option>
-            </select><br>
-            <button type="button" onclick="calculatePrice()">Calculate Price</button>
-        </form>
-        <div id="priceResult">
-            <h3>Your Estimated Price:</h3>
-            <p id="price"></p>
-        </div>
-    </section>
-
-    <section id="scope">
-        <h2>Scope of Work</h2>
-        <ul>
-            <li><i class="fas fa-trash-alt"></i> Removal of construction debris and dust</li>
-            <li><i class="fas fa-window-maximize"></i> Cleaning of floors, windows, and surfaces</li>
-            <li><i class="fas fa-paint-roller"></i> Wiping down walls and fixtures</li>
-            <li><i class="fas fa-broom"></i> Vacuuming and mopping</li>
-            <li><i class="fas fa-check-circle"></i> General tidying to prepare the site for occupancy</li>
-        </ul>
+    <section id="areaSelection">
+        <h2>Select Your Floor Plan Area</h2>
+        <label for="area">Area (m²): <output id="areaValue">100</output></label>
+        <input type="range" id="area" min="50" max="500" step="10" value="100">
     </section>
 
     <section id="pricing">
         <h2>Pricing Packages</h2>
         <div class="columns">
-            <div class="column budget">
+            <div class="column budget" data-package="budget" data-rate="4.25">
                 <h3>Budget</h3>
-                <p>10% Discount</p>
+                <p>Per m²: $4.25</p>
                 <ul>
                     <li>Visits: 1 visit</li>
                     <li>Dates: No changes allowed within 10 calendar days</li>
@@ -181,9 +134,10 @@
                     <li>Access: Additional detailing or high-level cleaning billed separately</li>
                 </ul>
             </div>
-            <div class="column standard">
+            <div class="column standard selected" data-package="standard" data-rate="4.75">
                 <h3>Standard</h3>
-                <p>Recommended - Best Value</p>
+                <p>Per m²: $4.75</p>
+                <p class="recommended">Recommended</p>
                 <ul>
                     <li>Visits: 2 visits</li>
                     <li>Dates: Changes allowed until 5 days prior to start</li>
@@ -194,9 +148,9 @@
                     <li>Access: Up to 2 hours of extras included, for things outside the initial scope</li>
                 </ul>
             </div>
-            <div class="column ultra">
+            <div class="column ultra" data-package="ultra" data-rate="5.75">
                 <h3>Ultra-Flexible</h3>
-                <p>20% Premium</p>
+                <p>Per m²: $5.75</p>
                 <ul>
                     <li>Visits: Unlimited visits until the job reaches the desired standard, limited to agreed initial scope areas</li>
                     <li>Dates: Completely flexible</li>
@@ -210,33 +164,62 @@
         </div>
     </section>
 
+    <section id="selection">
+        <h2>Your Selection</h2>
+        <p>Package: <span id="selectedPackage">Standard</span></p>
+        <p>Total Price: <span id="selectedPrice">$1,127.50</span> (incl. GST)</p>
+        <button>Get a Quote</button>
+    </section>
+
+    <section id="scope">
+        <h2>Scope of Work</h2>
+        <ul>
+            <li><i class="fas fa-trash-alt"></i> Removal of construction debris and dust</li>
+            <li><i class="fas fa-window-maximize"></i> Cleaning of floors, windows, and surfaces</li>
+            <li><i class="fas fa-paint-roller"></i> Wiping down walls and fixtures</li>
+            <li><i class="fas fa-broom"></i> Vacuuming and mopping</li>
+            <li><i class="fas fa-check-circle"></i> General tidying to prepare the site for occupancy</li>
+        </ul>
+        <p><em>Note: This is a standard scope of work and may vary depending on specific project requirements.</em></p>
+    </section>
+
     <script>
-        function calculatePrice() {
-            var area = document.getElementById('area').value;
-            var package = document.getElementById('package').value;
-            var rate;
+        const areaInput = document.getElementById('area');
+        const areaValue = document.getElementById('areaValue');
+        const columns = document.querySelectorAll('.column');
+        const selectedPackageSpan = document.getElementById('selectedPackage');
+        const selectedPriceSpan = document.getElementById('selectedPrice');
 
-            if (package === 'budget') {
-                rate = 4.25;
-            } else if (package === 'standard') {
-                rate = 4.75;
-            } else if (package === 'ultra') {
-                rate = 5.75;
-            }
+        let selectedPackage = 'standard';
+        let rate = 4.75;
 
-            if (isNaN(area) || area <= 0) {
-                alert('Please enter a valid area in m²');
-                return;
-            }
+        areaInput.addEventListener('input', () => {
+            const area = areaInput.value;
+            areaValue.textContent = area;
+            updatePrice();
+        });
 
-            var base = 550;
-            var subtotal = base + (area * rate);
-            var gst = subtotal * 0.10;
-            var total = subtotal + gst;
+        columns.forEach(column => {
+            column.addEventListener('click', () => {
+                columns.forEach(c => c.classList.remove('selected'));
+                column.classList.add('selected');
+                selectedPackage = column.dataset.package;
+                rate = parseFloat(column.dataset.rate);
+                selectedPackageSpan.textContent = selectedPackage.charAt(0).toUpperCase() + selectedPackage.slice(1);
+                updatePrice();
+            });
+        });
 
-            document.getElementById('price').innerHTML = 'Total Price: $' + total.toFixed(2) + ' (including GST)';
-            document.getElementById('priceResult').classList.add('show');
+        function updatePrice() {
+            const area = areaInput.value;
+            const subtotal = 550 + (area * rate);
+            const gst = subtotal * 0.1;
+            const total = subtotal + gst;
+            selectedPriceSpan.textContent = '$' + total.toFixed(2);
         }
+
+        // Initial update
+        updatePrice();
     </script>
 </body>
 </html>
