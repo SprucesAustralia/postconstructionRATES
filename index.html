@@ -13,19 +13,20 @@
             padding: 0;
         }
         header {
-            background-color: #f8f8f8;
+            background-color: #004d40; /* Dark green */
+            color: white;
             padding: 20px;
             text-align: center;
         }
         h1 {
             font-size: 2.5em;
             font-weight: 700;
-            color: #333;
+            color: white;
         }
         section {
             padding: 20px;
             margin: 40px 20px;
-            background-color: white;
+            background-color: #e0f2f1; /* Light green background */
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         #areaSelection {
@@ -55,11 +56,11 @@
             transform: scale(1.05);
         }
         .column.selected {
-            border: 2px solid #007BFF;
+            border: 2px solid #004d40; /* Dark green border for selected */
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
         .recommended {
-            background-color: #007BFF;
+            background-color: #004d40; /* Dark green */
             color: white;
             padding: 5px;
             font-size: 12px;
@@ -71,7 +72,7 @@
             text-align: center;
         }
         #selection button {
-            background-color: #007BFF;
+            background-color: #004d40; /* Dark green button */
             color: white;
             padding: 10px 20px;
             border: none;
@@ -79,7 +80,7 @@
             margin-top: 10px;
         }
         #selection button:hover {
-            background-color: #0056b3;
+            background-color: #00332b; /* Darker green on hover */
         }
         #scope ul {
             list-style: none;
@@ -89,7 +90,7 @@
             margin: 10px 0;
         }
         #scope i {
-            color: #007BFF;
+            color: #004d40; /* Dark green icons */
             margin-right: 10px;
         }
         #scope p {
@@ -109,13 +110,25 @@
 <body>
     <header>
         <h1>Post-Construction Cleaning Services</h1>
-        <p>Our pricing includes a base rate of $550 plus a per m² charge based on the selected package. All prices include 10% GST.</p>
+        <p>Our pricing includes a base rate of $550 plus a per m² charge based on the selected package. GST is exclusive and will be charged.</p>
     </header>
 
     <section id="areaSelection">
         <h2>Select Your Floor Plan Area</h2>
         <label for="area">Area (m²): <output id="areaValue">100</output></label>
-        <input type="range" id="area" min="50" max="500" step="10" value="100">
+        <input type="range" id="area" min="50" max="5000" step="10" value="100">
+    </section>
+
+    <section id="scope">
+        <h2>Standard Scope of Work</h2>
+        <ul>
+            <li><i class="fas fa-trash-alt"></i> Removal of construction debris and dust</li>
+            <li><i class="fas fa-window-maximize"></i> Cleaning of floors, windows, and surfaces</li>
+            <li><i class="fas fa-paint-roller"></i> Wiping down walls and fixtures</li>
+            <li><i class="fas fa-broom"></i> Vacuuming and mopping</li>
+            <li><i class="fas fa-check-circle"></i> General tidying to prepare the site for occupancy</li>
+        </ul>
+        <p><em>Note: This is a standard scope of work and may vary depending on specific project requirements.</em></p>
     </section>
 
     <section id="pricing">
@@ -167,20 +180,9 @@
     <section id="selection">
         <h2>Your Selection</h2>
         <p>Package: <span id="selectedPackage">Standard</span></p>
-        <p>Total Price: <span id="selectedPrice">$1,127.50</span> (incl. GST)</p>
-        <button>Get a Quote</button>
-    </section>
-
-    <section id="scope">
-        <h2>Scope of Work</h2>
-        <ul>
-            <li><i class="fas fa-trash-alt"></i> Removal of construction debris and dust</li>
-            <li><i class="fas fa-window-maximize"></i> Cleaning of floors, windows, and surfaces</li>
-            <li><i class="fas fa-paint-roller"></i> Wiping down walls and fixtures</li>
-            <li><i class="fas fa-broom"></i> Vacuuming and mopping</li>
-            <li><i class="fas fa-check-circle"></i> General tidying to prepare the site for occupancy</li>
-        </ul>
-        <p><em>Note: This is a standard scope of work and may vary depending on specific project requirements.</em></p>
+        <p>Total Price: <span id="selectedPrice">$1,025.00</span> (excl. GST)</p>
+        <p><em>Note: GST is exclusive and will be charged.</em></p>
+        <button onclick="window.location.href='https://spruces.co/'">Get a Quote</button>
     </section>
 
     <script>
@@ -213,9 +215,7 @@
         function updatePrice() {
             const area = areaInput.value;
             const subtotal = 550 + (area * rate);
-            const gst = subtotal * 0.1;
-            const total = subtotal + gst;
-            selectedPriceSpan.textContent = '$' + total.toFixed(2);
+            selectedPriceSpan.textContent = '$' + subtotal.toFixed(2);
         }
 
         // Initial update
